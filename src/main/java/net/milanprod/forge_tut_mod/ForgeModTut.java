@@ -22,7 +22,7 @@ public class ForgeModTut
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "forge_mod_tut";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public ForgeModTut()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
