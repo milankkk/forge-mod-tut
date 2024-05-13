@@ -1,6 +1,10 @@
 package net.milanprod.forge_tut_mod;
 
 import com.mojang.logging.LogUtils;
+import net.milanprod.forge_tut_mod.item.ModCreativeModeTabs;
+import net.milanprod.forge_tut_mod.item.ModItems;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -26,6 +30,10 @@ public class ForgeModTut
     public ForgeModTut()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModCreativeModeTabs.register(modEventBus);
+        ModItems.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -40,7 +48,10 @@ public class ForgeModTut
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.TEST_ITEM);
+            event.accept(ModItems.RAW_TEST_ITEM);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
